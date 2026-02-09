@@ -9,7 +9,7 @@ def main():
         description="Simple CLI task tracker"
     )
 
-    subparsers = parser.add_subparsers(dest="command", requierd=True)
+    subparsers = parser.add_subparsers(dest="command", required=True)
 
     # add
     add = subparsers.add_parser("add", help="Add a new task")
