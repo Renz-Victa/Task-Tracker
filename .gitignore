@@ -205,3 +205,21 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Task tracker local data
+tasks.json
+tasks_*.json
+data/
+storage/
+
+# Environment variables / secrets 
+.env
+.env.*
+
+# CLI runtime artifacts
+*.log
+*.pid
+
+# User-specific config 
+.tasktracker/
+config.json
