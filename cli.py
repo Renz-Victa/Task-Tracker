@@ -1,4 +1,5 @@
 # task_tracker/cli.py
+
 import argparse
 import json
 import os
@@ -6,7 +7,7 @@ from task_tracker.commands import add_task, list_tasks, done_task
 
 FILE = "tasks.json"
 
-# Helpers
+# Load Tasks from JSON
 
 
 def load_tasks():
@@ -79,6 +80,8 @@ def delete_tasks(task_id):
     save_tasks(new_tasks)
     print("Task deleted succesffuly!")
 
+# List All Tasks Function
+
 
 def list_tasks(task_id):
     tasks = load_tasks()
@@ -86,9 +89,14 @@ def list_tasks(task_id):
         print("No tasks found.")
         return
 
+    print("\nYour Tasks:\n" + "-" * 30)
+
     for task in tasks:
         status = "✓" if task["completed"] else "X"
-        print(f"{task['id']}. [{status}] {task['title']}")
+        print(f"ID: {task['id']}")
+        print(f"Title: {task['title']}")
+        print(f"Status: {task['status']}")
+        print("-" * 30)
 
 # CLI Setup
 
