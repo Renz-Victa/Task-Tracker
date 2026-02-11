@@ -188,7 +188,7 @@ def main():
     add = subparsers.add_parser("add", help="Add a new task")
     add.add_argument("title", help="Task description")
 
-    # Update
+    # Update Command
     update_parser = subparsers.add_parser("update")
     update_parser = subparsers.add_parser("list")
     update_parser = subparsers.add_parser("pending")
