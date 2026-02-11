@@ -41,6 +41,16 @@ def add_task(title):
     print("Task added successfully!")
 
 
+def update_status(task_id, new_status):
+    tasks = load_tasks()
+
+    valid_statuses = ["todo", "in-progress", "done"]
+
+    if new_status not in valid_statuses:
+        print("Invalid status. Use: todo, in-progress, done")
+        return
+
+
 def update_task(task_id, new_title=None, completed=None):
     tasks = load_tasks()
 
@@ -67,13 +77,13 @@ def delete_tasks(task_id):
         return
 
     save_tasks(new_tasks)
-    print("Task delted succesffuly!")
+    print("Task deleted succesffuly!")
 
 
 def list_tasks(task_id):
     tasks = load_tasks()
     if not tasks:
-        print("No tasks ofund.")
+        print("No tasks found.")
         return
 
     for task in tasks:
