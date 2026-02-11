@@ -86,6 +86,9 @@ def delete_tasks(task_id):
 def list_tasks(task_id):
     tasks = load_tasks()
 
+    if status:
+        tasks = [task for task in tasks if task["status"] == status]
+
     if not tasks:
         print("No tasks found.")
         return
@@ -116,6 +119,8 @@ def main():
 
     # Update
     update_parser = subparsers.add_parser("update")
+    update_parser = subparsers.add_parser("list")
+    update_parser.add_argument("--status", help="Filter by status")
     update_parser.add_argument("id", type=int, help="Task ID")
     update_parser.add_argument("status", help="todo | in-progess | done")
     update_parser.add_argument("--title", help="New title")
