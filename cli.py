@@ -80,6 +80,21 @@ def delete_tasks(task_id):
     save_tasks(new_tasks)
     print("Task deleted succesffuly!")
 
+
+def list_done_tasks():
+    tasks = load_tasks()
+
+    done_tasks = [task for task in tasks if task["status"] == "done"]
+
+    if not done_tasks:
+        print("No completed tasks found.")
+        return
+
+    print("\nCompleted Tasks:\n" + "-" * 30)
+
+    for task in done_tasks:
+        print(f"{task['id']}. ✅ {task['title']}")
+
 # List All Tasks Function
 
 
