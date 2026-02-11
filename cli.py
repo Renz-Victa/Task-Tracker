@@ -110,6 +110,23 @@ def list_not_done_tasks():
     for task in not_done_tasks:
         print(f"{task['id']}. [{task['status']}] {task['title']}")
 
+
+def list_in_progress_tasks():
+    tasks = load_tasks()
+
+    in_progress_tasks = [
+        task for task in tasks if task("status") == "in-progress"
+    ]
+
+    if not in_progress_tasks:
+        print("No tasks in progress.")
+        return
+
+    print("\nIn-Progress Tasks:\n" + "-" * 30)
+
+    for task in in_progress_tasks:
+        print(f"{task['id']}. ⏳ {task['task']}")
+
 # List All Tasks Function
 
 
