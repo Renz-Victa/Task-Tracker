@@ -116,8 +116,13 @@ def list_not_done_tasks():
 def list_tasks(task_id):
     tasks = load_tasks()
 
+    exclude = "done"
+
     if status:
         tasks = [task for task in tasks if task["status"] == status]
+
+    if exclude:
+        tasks = [task for task in tasks if task["status"] != exclude]
 
     if not tasks:
         print("No tasks found.")
@@ -152,6 +157,7 @@ def main():
     update_parser = subparsers.add_parser("list")
     update_parser = subparsers.add_parser("pending")
     update_parser.add_argument("--status", help="Filter by status")
+    update_parser.add_argument("--exclude", help="Exclude a status")
     update_parser.add_argument("id", type=int, help="Task ID")
     update_parser.add_argument("status", help="todo | in-progess | done")
     update_parser.add_argument("--title", help="New title")
@@ -179,6 +185,8 @@ def main():
         done_task(args.id)
     elif args.command == "pending":
         list_not_done_tasks(args.id)
+    elif args.command == "exclude":
+        list_tasks(args.id)
 
 
 if __name__ == "__main__":
