@@ -35,15 +35,21 @@ def current_time():
 # Core Functions
 
 
-def add_task(title):
+def add_task(description):
     tasks = load_tasks()
+    now = current_time()
+
     new_task = {
         "id": get_next_id(tasks),
-        "title": title,
-        "completed": False
+        "description": description,
+        "status": "todo",
+        "createdAt": now,
+        "updatedAt": now
     }
+
     tasks.append(new_task)
     save_tasks(tasks)
+
     print("Task added successfully!")
 
 
@@ -179,6 +185,8 @@ def main():
     update_parser = subparsers.add_parser("list")
     update_parser = subparsers.add_parser("pending")
     update_parser = subparsers.add_parser("in-progress")
+    update_parser = subparsers.add_parser("add")
+    update_parser.add_argument("description")
     update_parser.add_argument("--status", help="Filter by status")
     update_parser.add_argument("--exclude", help="Exclude a status")
     update_parser.add_argument("id", type=int, help="Task ID")
@@ -199,7 +207,7 @@ def main():
     # Command Handling
 
     if args.command == "add":
-        add_task(args.title)
+        add_task(args.description)
     elif args.command == "list":
         list_tasks()
     elif args.command == "status":
