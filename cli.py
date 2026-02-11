@@ -108,6 +108,7 @@ def main():
     # Update
     update_parser = subparsers.add_parser("update")
     update_parser.add_argument("id", type=int, help="Task ID")
+    update_parser.add_argument("status", help="todo | in-progess | done")
     update_parser.add_argument("--title", help="New title")
     update_parser.add_argument("--complete", action="store_true")
     update_parser.add_argument("--incomplete", action="store_true")
@@ -135,3 +136,17 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+status_icons = {
+    "todo": "📝",
+    "in-progress": "⏳",
+    "done": "✅"
+}
+
+task = {
+    "id": 1,
+    "status": "in-progress",
+    "title": "Fix the undefined variable error"
+}
+
+print(f"{task['id']}. {status_icons[task['status']]} {task['title']}")
