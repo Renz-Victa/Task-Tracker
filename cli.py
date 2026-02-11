@@ -127,6 +127,8 @@ def main():
         add_task(args.title)
     elif args.command == "list":
         list_tasks()
+    elif args.command == "status":
+        update_status(args.id, args.status)
     elif args.command == "done":
         done_task(args.id)
 
