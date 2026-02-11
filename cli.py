@@ -150,6 +150,7 @@ def main():
     # Update
     update_parser = subparsers.add_parser("update")
     update_parser = subparsers.add_parser("list")
+    update_parser = subparsers.add_parser("pending")
     update_parser.add_argument("--status", help="Filter by status")
     update_parser.add_argument("id", type=int, help="Task ID")
     update_parser.add_argument("status", help="todo | in-progess | done")
@@ -176,6 +177,8 @@ def main():
         update_status(args.id, args.status)
     elif args.command == "done":
         done_task(args.id)
+    elif args.command == "pending":
+        list_not_done_tasks(args.id)
 
 
 if __name__ == "__main__":
