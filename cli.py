@@ -95,6 +95,21 @@ def list_done_tasks():
     for task in done_tasks:
         print(f"{task['id']}. ✅ {task['title']}")
 
+
+def list_not_done_tasks():
+    tasks = load_tasks()
+
+    not_done_tasks = [task for task in tasks if task["status"] != "done"]
+
+    if not not_done_tasks:
+        print("No pending tasks found.")
+        return
+
+    print("\nPending Tasks:\n" + "-" * 30)
+
+    for task in not_done_tasks:
+        print(f"{task['id']}. [{task['status']}] {task['title']}")
+
 # List All Tasks Function
 
 
