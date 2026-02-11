@@ -85,6 +85,7 @@ def delete_tasks(task_id):
 
 def list_tasks(task_id):
     tasks = load_tasks()
+
     if not tasks:
         print("No tasks found.")
         return
@@ -92,11 +93,8 @@ def list_tasks(task_id):
     print("\nYour Tasks:\n" + "-" * 30)
 
     for task in tasks:
-        status = "✓" if task["completed"] else "X"
-        print(f"ID: {task['id']}")
-        print(f"Title: {task['title']}")
-        print(f"Status: {task['status']}")
-        print("-" * 30)
+        icon = status_icons.get(task["status"], "")
+        print(f"{task['id']:>3}. {icon} {task['title']}")
 
 # CLI Setup
 
