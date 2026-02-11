@@ -173,6 +173,7 @@ def main():
     update_parser = subparsers.add_parser("update")
     update_parser = subparsers.add_parser("list")
     update_parser = subparsers.add_parser("pending")
+    update_parser = subparsers.add_parser("in-progress")
     update_parser.add_argument("--status", help="Filter by status")
     update_parser.add_argument("--exclude", help="Exclude a status")
     update_parser.add_argument("id", type=int, help="Task ID")
@@ -204,6 +205,8 @@ def main():
         list_not_done_tasks(args.id)
     elif args.command == "exclude":
         list_tasks(args.id)
+    elif args.command == "in-progress":
+        list_in_progress_tasks(args.id)
 
 
 if __name__ == "__main__":
