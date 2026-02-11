@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+from datetime import datetime
 from task_tracker.commands import add_task, list_tasks, done_task
 
 FILE = "tasks.json"
@@ -26,6 +27,10 @@ def get_next_id(tasks):
     if not tasks:
         return 1
     return max(task["id"] for task in tasks) + 1
+
+
+def current_time():
+    return datetime.now().isoformat(timespec="seconds")
 
 # Core Functions
 
