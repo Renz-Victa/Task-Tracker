@@ -63,17 +63,25 @@ def update_status(task_id, new_status):
         return
 
 
-def update_task(task_id, new_title=None, completed=None):
+def update_task(task_id, new_title=None, description=None, status=None):
     tasks = load_tasks()
+    valid_statuses = ["todo", "in-progress", "done"]
 
     for task in tasks:
         if task["id"] == task_id:
             if new_title:
                 task["title"] = new_title
-            if completed is not None:
-                task["completed"] = completed
+            if description is not None:
+                task["description"] = description
+            if status is not None:
+                if status not in valid_statuses:
+                    print("Invalid status. Use: todo, in-progress, done")
+                    return
+                task["status"] = status
 
+            task["updateAt"] = current_time()
             save_tasks(tasks)
+
             print("Task updated successfully!")
             return
 
@@ -126,7 +134,7 @@ def list_in_progress_tasks():
     tasks = load_tasks()
 
     in_progress_tasks = [
-        task for task in tasks if task("status") == "in-progress"
+        task for task in tasks if task["status"] == "in-progress"
     ]
 
     if not in_progress_tasks:
@@ -136,7 +144,7 @@ def list_in_progress_tasks():
     print("\nIn-Progress Tasks:\n" + "-" * 30)
 
     for task in in_progress_tasks:
-        print(f"{task['id']}. ⏳ {task['task']}")
+        print(f"{task['id']}. ⏳ {task['title']}")
 
 # List All Tasks Function
 
@@ -186,7 +194,7 @@ def main():
     update_parser = subparsers.add_parser("pending")
     update_parser = subparsers.add_parser("in-progress")
     update_parser = subparsers.add_parser("add")
-    update_parser.add_argument("description")
+    update_parser.add_argument("--description")
     update_parser.add_argument("--status", help="Filter by status")
     update_parser.add_argument("--exclude", help="Exclude a status")
     update_parser.add_argument("id", type=int, help="Task ID")
@@ -220,6 +228,8 @@ def main():
         list_tasks(args.id)
     elif args.command == "in-progress":
         list_in_progress_tasks(args.id)
+    elif args.command == "update":
+        update_task(args.id, args.description, args.status)
 
 
 if __name__ == "__main__":
