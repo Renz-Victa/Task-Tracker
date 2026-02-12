@@ -14,3 +14,7 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 
 - Python 3
 - JSON for saving tasks
+
+## Project URL
+
+https://github.com/Renz-Victa/Task-Tracker

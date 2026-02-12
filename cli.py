@@ -13,8 +13,14 @@ FILE = "tasks.json"
 def load_tasks():
     if not os.path.exists(FILE):
         return []
-    with open(FILE, "r") as f:
-        return json.load(f)
+    try:
+        with open(FILE, "r") as f:
+            content = f.read().strip()
+            if not content:
+                return []
+            return json.loads(content)
+    except json.JSONDecodeError:
+        return []
 
 
 def save_tasks(tasks):
@@ -148,16 +154,13 @@ def list_in_progress_tasks():
 # List All Tasks Function
 
 
-def list_tasks(task_id):
+def list_tasks(task_id=None):
     tasks = load_tasks()
 
     exclude = "done"
 
-    if status:
-        tasks = [task for task in tasks if task["status"] == status]
-
     if exclude:
-        tasks = [task for task in tasks if task["status"] != exclude]
+        tasks = [task for task in tasks if task.get("status") != exclude]
 
     if not tasks:
         print("No tasks found.")
@@ -166,10 +169,13 @@ def list_tasks(task_id):
     print("\nYour Tasks:\n" + "-" * 30)
 
     for task in tasks:
-        status = "✓" if task["completed"] else "X"
+        title = task.get("title") or task.get("description", "Untitled")
+        status = task.get("status", "todo")
+        completed = task.get("completed", False)
+        status_icon = "✓" if completed else "✗"
         print(f"ID: {task['id']}")
-        print(f"Title: {task['title']}")
-        print(f"Status: {task['status']}")
+        print(f"Title: {title}")
+        print(f"Status: {status} {status_icon}")
         print("-" * 30)
 
 # CLI Setup
@@ -188,46 +194,48 @@ def main():
     add.add_argument("title", help="Task description")
 
     # Update Command
-    update_parser = subparsers.add_parser("update")
-    update_parser = subparsers.add_parser("list")
-    update_parser = subparsers.add_parser("pending")
-    update_parser = subparsers.add_parser("in-progress")
-    update_parser = subparsers.add_parser("add")
-    update_parser.add_argument("--description")
-    update_parser.add_argument("--status", help="Filter by status")
-    update_parser.add_argument("--exclude", help="Exclude a status")
+    update_parser = subparsers.add_parser("update", help="Update a task")
     update_parser.add_argument("id", type=int, help="Task ID")
-    update_parser.add_argument("status", help="todo | in-progess | done")
     update_parser.add_argument("--title", help="New title")
-    update_parser.add_argument("--complete", action="store_true")
-    update_parser.add_argument("--incomplete", action="store_true")
+    update_parser.add_argument("--description", help="New description")
+    update_parser.add_argument("--status", help="todo | in-progress | done")
+
+    # Pending Command
+    pending_parser = subparsers.add_parser(
+        "pending", help="List pending tasks")
+
+    # In-progress Command
+    in_progress_parser = subparsers.add_parser(
+        "in-progress", help="List in-progress tasks")
 
     # list
-    subparsers.add_parser("list", help="List all tasks")
+    list_parser = subparsers.add_parser("list", help="List all tasks")
 
     # done
     done = subparsers.add_parser("done", help="Mark a task as done")
     done.add_argument("id", type=int, help="Task ID")
 
+    # delete
+    delete = subparsers.add_parser("delete", help="Delete a task")
+    delete.add_argument("id", type=int, help="Task ID")
+
     args = parser.parse_args()
 
     # Command Handling
     if args.command == "add":
-        add_task(args.description)
+        add_task(args.title)
     elif args.command == "list":
-        list_tasks()
-    elif args.command == "status":
-        update_status(args.id, args.status)
+        list_tasks(None)
+    elif args.command == "update":
+        update_task(args.id, args.title, args.description, args.status)
     elif args.command == "done":
         done_task(args.id)
     elif args.command == "pending":
-        list_not_done_tasks(args.id)
-    elif args.command == "exclude":
-        list_tasks(args.id)
+        list_not_done_tasks()
     elif args.command == "in-progress":
-        list_in_progress_tasks(args.id)
-    elif args.command == "update":
-        update_task(args.id, args.description, args.status)
+        list_in_progress_tasks()
+    elif args.command == "delete":
+        delete_tasks(args.id)
 
 
 if __name__ == "__main__":
