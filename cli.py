@@ -1,5 +1,4 @@
 # task_tracker/cli.py
-
 import argparse
 import json
 import os
@@ -213,7 +212,6 @@ def main():
     args = parser.parse_args()
 
     # Command Handling
-
     if args.command == "add":
         add_task(args.description)
     elif args.command == "list":
