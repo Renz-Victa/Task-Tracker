@@ -1,6 +1,3 @@
-## Project URL
-https://renz-victa.github.io/Task-Tracker/
-
 # Task-Tracker 
 
 A simple command-line task tracker built with Python. The task-tracker lets you add tasks, view them an mark them as completed while saving your data in a local JSON file so nothing disappears when the programs closes.
@@ -17,3 +14,7 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 
 - Python 3
 - JSON for saving tasks
+
+## Project Page URL
+
+https://roadmap.sh/projects/task-tracker
