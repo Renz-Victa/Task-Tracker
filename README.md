@@ -22,6 +22,7 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 
 python task_tracker.py
 
+## 2. Available Commands
 
 
 ## Project Page URL
