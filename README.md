@@ -58,5 +58,9 @@ python cli.py mark-done 1
 
 python cli.py delete 1
 
+## 📂 Data Storage
+
+Tasks are stored locally in a JSON file (task.json)
+
 ## Project Page URL
 https://roadmap.sh/projects/task-tracker
