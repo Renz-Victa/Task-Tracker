@@ -20,9 +20,15 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 
 ## 1. Run the Application
 
-python task_tracker.py
+python cli.py
 
 ## 2. Available Commands
+
+➕ Add a Task
+python cli.py add "Buy groceries"
+
+📋 List All Tasks
+
 
 
 ## Project Page URL
