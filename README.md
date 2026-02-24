@@ -34,6 +34,16 @@ python cli.py add "Buy groceries"
 
 ## 📋 List All Tasks
 
+python cli.py list
+
+## 📋 List Tasks by Status
+
+- python cli.py list todo
+- python cli.py list in-progress
+- python cli.py list done
+
+## 🔄 Update a Task
+
 
 
 ## Project Page URL
