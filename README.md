@@ -44,6 +44,20 @@ python cli.py list
 
 ## 🔄 Update a Task
 
+python cli.py update 1 "Buy groceries and cook dinner"
+
+## ✅ Mark Task as in Progress
+
+python cli.py mark-in-progress 1
+
+## ✔️ Mark Task as Done
+
+python cli.py mark-done 1
+
+## ❌ Delete a Task
+
+python cli.py delete 1
+
 
 
 ## Project Page URL
