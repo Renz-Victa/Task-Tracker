@@ -22,12 +22,17 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 
 python cli.py
 
-## 2. Available Commands
+<div align="center">
 
-➕ Add a Task
+## 2. Available Commands 
+
+</div>
+
+## ➕ Add a Task
+
 python cli.py add "Buy groceries"
 
-📋 List All Tasks
+## 📋 List All Tasks
 
 
 
