@@ -58,7 +58,5 @@ python cli.py mark-done 1
 
 python cli.py delete 1
 
-
-
 ## Project Page URL
 https://roadmap.sh/projects/task-tracker
