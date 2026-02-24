@@ -12,5 +12,17 @@ A simple command-line task tracker built with Python. The task-tracker lets you 
 - Python 3
 - JSON for saving tasks
 
+<div align="center">
+
+## Usage 
+
+</div>
+
+## 1. Run the Application
+
+python task_tracker.py
+
+
+
 ## Project Page URL
 https://roadmap.sh/projects/task-tracker
